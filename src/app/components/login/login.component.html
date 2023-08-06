@@ -21,7 +21,7 @@
           <div class="col-lg-8">
             
   
-            <form>
+            <form [formGroup]="loginForm" >
               <!-- 2 column grid layout with text inputs for the first and last names -->
               <!-- <div class="row"> -->
                 <!-- <div class="col-md-6 mb-4"> -->
@@ -29,7 +29,7 @@
                     <span class="fa fa-user p-2"></span>
                     <label class="form-label" for="form3Example1">User Name</label>
                     
-                    <input type="text" id="form3Example1" class="form-control" />
+                    <input type="text" id="form3Example1" class="form-control" formControlName="username"/>
                     
                   </div>
                 <!-- </div> -->
@@ -37,7 +37,7 @@
                   <div class="form-outline">
                     <span class="fa fa-lock p-2"></span>
                     <label class="form-label" for="form3Example2">Password</label>
-                    <input [type]="type" id="form3Example2" class="form-control" >
+                    <input [type]="type" id="form3Example2" class="form-control" formControlName="password">
                     <span (click)="hideShowPass()" class="fa {{eyeIcon}}"></span>
                    
                   </div>
@@ -66,7 +66,7 @@
   
               <!-- Submit button -->
               <br>
-              <button type="submit" class="btn btn-primary btn-block mb-4">
+              <button type="submit" class="btn btn-primary btn-block mb-4" (click)="onLogin()">
                 Login
               </button>
               <div class="text-center">Don't have an account? <a id="forget" style="text-decoration:none" routerLink="/signup">Sign Up</a></div>
