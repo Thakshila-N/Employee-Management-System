@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-login',
@@ -8,21 +11,20 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit{
 
+
   // Implement the formGroup
   loginForm! : FormGroup
 
-  constructor(
-    // inject form builder
-    private fb : FormBuilder
-  ){}
+ constructor(
+    private fb: FormBuilder,
+    private auth: AuthService
+    ){}
 
   ngOnInit(): void {
-
     this.loginForm = this.fb.group({
-      username : ['', Validators.required],
-      password : ['', Validators.required]
-    });
-
+      username: new FormControl('',[Validators.required]),
+      password: new FormControl('',[Validators.required])
+    })
   }
 
   // This section related to the show and hide password section
@@ -32,7 +34,9 @@ export class LoginComponent implements OnInit{
 
   hideShowPass(){
     this.isText = !this.isText;
+
     //
+
     this.isText ? this.eyeIcon = "fa-eye" : this.eyeIcon = "fa-eye-slash";
     this.isText ? this.type = "text" : this.type = "password";
   }
@@ -48,5 +52,19 @@ onSubmit(){
 
   }
 }
+
+  onLogin(){
+    if(this.loginForm.valid){
+      this.auth.login(this.loginForm.value)
+      .subscribe({
+        next:(res)=> {
+          alert(res.message)
+        },
+        error:(err)=>{
+          alert(err?.error.message)
+        }
+      })
+    }
+  }
 
 }

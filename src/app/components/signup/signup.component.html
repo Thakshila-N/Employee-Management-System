@@ -21,14 +21,14 @@
           <div class="col-lg-8">
             
   
-            <form>
+            <form [formGroup]="signupForm">
               <!-- 2 column grid layout with text inputs for the first and last names -->
               <div class="row">
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
                     <!-- <span class="fa fa-user p-2"></span> -->
                     <label class="form-label" for="form3Example1">First Name</label>
-                    <input type="text" id="form3Example1" class="form-control" />
+                    <input type="text" id="form3Example1" class="form-control" formControlName="firstName"/>
                     
                   </div>
                 </div>
@@ -36,7 +36,7 @@
                     <div class="form-outline">
                         <!-- <span class="fa fa-user p-2"></span> -->
                         <label class="form-label" for="form3Example1">Last Name</label>
-                        <input type="text" id="form3Example1" class="form-control" />
+                        <input type="text" id="form3Example1" class="form-control" formControlName="lastName"/>
                         
                       </div>
                 </div>
@@ -44,19 +44,19 @@
   
               <!-- Email input -->
               <div class="form-outline mb-4">
-                <input type="email" id="form3Example3" class="form-control" />
+                <input type="email" id="form3Example3" class="form-control" formControlName="email"/>
                 <label class="form-label" for="form3Example3">Email address</label>
               </div>
 
                <!-- User Name input -->
                <div class="form-outline mb-4">
-                <input type="text" id="form3Example3" class="form-control" />
+                <input type="text" id="form3Example3" class="form-control" formControlName="username" />
                 <label class="form-label" for="form3Example3">User Name</label>
               </div>
   
               <!-- Password input -->
               <div class="form-outline mb-4">
-                <input [type]="type" id="form3Example2" class="form-control" >
+                <input [type]="type" id="form3Example2" class="form-control"  formControlName="password">
                     <span (click)="hideShowPass()" class="fa {{eyeIcon}}"></span>
                     <label class="form-label" for="form3Example3">Password</label>
               </div>
@@ -71,8 +71,8 @@
   
               <!-- Submit button -->
               <br>
-              <button type="submit" class="btn btn-primary btn-block mb-4">
-                Login
+              <button type="submit" class="btn btn-primary btn-block mb-4" (click)="onSignup()">
+                Sign Up
               </button>
               <div class="text-center">Already have an account? <a id="forget" style="text-decoration:none" routerLink="/login">Login</a></div>
   
